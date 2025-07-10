@@ -1,0 +1,27 @@
+{
+  "products": [
+    {
+      "id": "prod-001",
+      "name": "Susu Sapi Murni 1L",
+      "description": "Susu segar murni langsung dari peternakan, tanpa bahan pengawet. Cocok untuk konsumsi langsung atau diolah.",
+      "price": 25000,
+      "imageUrl": "https://placehold.co/600x400/FFFFFF/333333?text=Susu+Sapi"
+    },
+    {
+      "id": "prod-002",
+      "name": "Susu Plain 500ml",
+      "description": "Susu alami dibuat dari susu segar pilihan. Kaya akan probiotik baik untuk pencernaan.",
+      "price": 13000,
+      "imageUrl": "https://placehold.co/600x400/FFFFFF/333333?text=Susu+Sapi"
+    },
+    {
+      "id": "prod-003",
+      "name": "Susu Kambing Etawa 500ml",
+      "description": "Susu kambing etawa dengan nutrisi tinggi, baik untuk kesehatan pernapasan dan tulang.",
+      "price": 30000,
+      "imageUrl": "https://placehold.co/600x400/FFFFFF/333333?text=Susu+Kambing"
+    }
+  ],
+  "orders": []
+}
+
