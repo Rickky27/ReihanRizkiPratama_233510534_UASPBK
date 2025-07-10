@@ -38,29 +38,43 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue'),
     },
     {
-        // Catch-all route untuk menangani URL yang tidak cocok (404 Not Found)
-        path: '/:pathMatch(.*)*',
-        name: 'NotFound',
-        component: () => import('../views/NotFoundView.vue')
+      // Catch-all route untuk menangani URL yang tidak cocok (404 Not Found)
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('../views/NotFoundView.vue')
     }
   ],
+
+  // PENINGKATAN: Mengontrol posisi scroll saat berpindah halaman
+  scrollBehavior(to, from, savedPosition) {
+    // Jika pengguna menekan tombol back/forward di browser, kembali ke posisi scroll yang tersimpan
+    if (savedPosition) {
+      return savedPosition;
+    }
+    // Jika tidak, selalu scroll ke paling atas halaman baru
+    else {
+      return { top: 0 };
+    }
+  },
 });
 
 // Navigation Guard (Penjaga Navigasi)
-// Fungsi ini akan berjalan setiap kali pengguna mencoba berpindah halaman.
+// Fungsi ini akan berjalan SETIAP KALI pengguna mencoba berpindah halaman.
 router.beforeEach((to, from, next) => {
-  // Cek apakah rute yang dituju memerlukan login
+  // Cek apakah rute yang dituju memiliki penanda 'requiresAuth: true'
   const requiresAuth = to.meta.requiresAuth;
   
   // Cek apakah pengguna sudah login (dengan memeriksa token di localStorage)
   const isLoggedIn = !!localStorage.getItem('user-token');
 
+  // JIKA rute butuh login TAPI pengguna BELUM login
   if (requiresAuth && !isLoggedIn) {
-    // Jika rute butuh login TAPI pengguna belum login,
-    // alihkan mereka ke halaman login.
+    // Alihkan mereka ke halaman login.
     next({ name: 'login' });
-  } else {
-    // Jika tidak, izinkan navigasi.
+  } 
+  // JIKA TIDAK (pengguna sudah login ATAU rute tidak butuh login)
+  else {
+    // Izinkan navigasi untuk melanjutkan.
     next();
   }
 });
